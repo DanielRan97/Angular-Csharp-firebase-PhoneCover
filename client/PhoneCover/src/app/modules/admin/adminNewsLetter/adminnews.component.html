@@ -1,0 +1,151 @@
+
+<div id="newsLetter">
+  <div style="text-align: left;">
+    <input id="searchInput" #searchbyname type="text" nbInput placeholder="Search by name"
+      (keyup)="searchUsers(searchbyname.value)">
+    <input id="searchInput" #searchbyEmail type="text" (keyup)="searchUsersByEmail(searchbyEmail.value)" nbInput
+      placeholder="Search by email">
+
+      <nb-select id="searchInput" placeholder="Sort By">
+        <nb-option value="id" (click)="sortById()" >ID</nb-option>
+        <nb-option value="1name" (click)="sortByName()">Name</nb-option>
+        <nb-option value="2" (click)="sortByEmail()">Email</nb-option>
+      </nb-select>
+  </div>
+  <div id="tableDiv">
+
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Actions</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!showsearch">
+        <tr *ngFor="let user of users">
+          <th scope="row">{{user.id}}</th>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td><button type="button" (click)="getValues(user.name,user.email)" class="btn btn-primary btn-sm"
+              style="border-radius: 73px;width: 60px;" data-toggle="modal" data-target="#exampleModal2">
+              EDIT
+            </button>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header" [ngClass]="{'dialogThemeClass':dialogTheme2 == true}">
+                    <h5 class="modal-title" id="exampleModal2Label">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true" style="color: red;">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" [ngClass]="{'dialogThemeClass':dialogTheme2 == true}">
+                    <div>
+                      <form #f="ngForm" [formGroup]="UsersForms">
+                        <div class="col">
+                          <input type="text" formControlName="name"
+                            style="width: 50%;margin-left: auto;margin-right: auto;margin-top: 10px;"
+                            class="form-control" placeholder="Name" required maxlength="20">
+                          <p class="errorText"
+                            *ngIf="!UsersForms.controls.name.valid && UsersForms.controls.name.touched">
+                            Name is required
+                          </p>
+                          <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="email"
+                            style="width: 50%;margin-left: auto;margin-right: auto;margin-top: 10px;"
+                            class="form-control" placeholder="Email" required>
+                          <p class="errorText"
+                            *ngIf="!UsersForms.controls.email.valid && UsersForms.controls.email.touched">
+                            Email is required
+                          </p>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer" [ngClass]="{'dialogThemeClass':dialogTheme2 == true}">
+                    <p *ngIf="editDone" style="color: green;">{{editDone}} <i class="fas fa-check"
+                        style="margin-left: 4px;"></i></p>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" [disabled]="!f.valid" class="btn btn-primary"
+                      (click)="editUser(f,user.id)">Save changes</button>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </td>
+          <td><button nbButton shape="round" size="small" status="danger" (click)="removeUser(user.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="showsearch">
+        <tr *ngFor="let user of searchUser">
+          <th scope="row">{{user.id}}</th>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td><button type="button" (click)="getValues(user.name,user.email)" class="btn btn-primary btn-sm"
+              style="border-radius: 73px;width: 60px;" data-toggle="modal" data-target="#exampleModal2">
+              EDIT
+            </button>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal2Label">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div>
+
+
+                      <form #f="ngForm" [formGroup]="UsersForms">
+                        <div class="col">
+                          <input type="text" formControlName="name"
+                            style="width: 50%;margin-left: auto;margin-right: auto;margin-top: 10px;"
+                            class="form-control" placeholder="Name" required maxlength="20">
+                          <p class="errorText"
+                            *ngIf="!UsersForms.controls.name.valid && UsersForms.controls.name.touched">
+                            Name is required
+                          </p>
+                          <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="email"
+                            style="width: 50%;margin-left: auto;margin-right: auto;margin-top: 10px;"
+                            class="form-control" placeholder="Email" required>
+                          <p class="errorText"
+                            *ngIf="!UsersForms.controls.email.valid && UsersForms.controls.email.touched">
+                            Email is required
+                          </p>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <p *ngIf="editDone" style="color: green;">{{editDone}} <i class="fas fa-check"
+                        style="margin-left: 4px;"></i></p>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" [disabled]="!f.valid" class="btn btn-primary"
+                      (click)="editUser(f,user.id)">Save changes</button>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </td>
+          <td><button nbButton shape="round" size="small" status="danger" (click)="removeUser(user.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

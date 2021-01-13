@@ -1,0 +1,67 @@
+
+#tableSort{
+  margin-left: 5px;
+  display: inline-block;
+}
+
+#tableFilter{
+  margin-left: 5px;
+  display: inline-block;
+}
+
+#typeFilter{
+  margin-left: 5px;
+  display: inline-block;
+}
+
+#serchInput{
+    margin-left: 5px;
+    display: inline-block;
+}
+
+#tableDiv{
+    max-height: 500px;
+    overflow: auto;
+}
+
+#tableDiv thead th {
+  background-color:  #454d55;
+  position: sticky;
+  top: 0;
+}
+
+.dialogThemeClass{
+  background-color: #0f121e;
+  color: lightgray;
+}
+
+#Cform input{
+margin:4px;
+}
+
+.errorText{
+  margin-top: -22px;
+  margin-left: 92px;
+  font-size: 13px;
+  color: red;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+

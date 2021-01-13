@@ -1,0 +1,31 @@
+
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+    <div class="container">
+      <a (click)="logout()" class="navbar-text navbar-right navbar-link">Admin Logout</a>
+    </div>
+  </nav>
+  <h1 class="header">Name and Photo</h1>
+  <div>
+    <div>
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top image" [src]="user.image" *ngIf="user.image" alt="User image">
+        <img class="card-img-top image" src="https://via.placeholder.com/400x300" *ngIf="!user.image" alt="User image">
+        <div *ngIf='user.provider != "password"'class="card-body">
+          <h4 class="card-title">{{user.name}}</h4>
+        </div>
+        <div *ngIf='user.provider == "password"'class="card-body">
+          <form [formGroup]="profileForm">
+            <div class="form-group">
+                <label>Your name</label>
+                <input type="text" formControlName="name" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label>Photo URL</label>
+                <input type="text" formControlName="photoURL" class="form-control" required>
+              </div>
+          </form>
+          <button (click)="save(profileForm.value)" id="saveButton">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,54 @@
+<nb-layout>
+  <nb-layout-column>
+
+    <div id="add">
+      <h1>Add Product</h1>
+      <form #f="ngForm" [formGroup]="addProductForms">
+
+        <input type="text" formControlName="name" nbInput placeholder="Name*" required maxlength="20">
+        <p class="errorText" *ngIf="!addProductForms.controls.name.valid && addProductForms.controls.name.touched">
+          Name is required
+        </p>
+
+        <nb-select formControlName="category" placeholder="Category*" required>
+          <nb-option #category *ngFor="let c of onlyCategory" (click)="checkTypes(category.value)" value="{{c}}">{{c}}</nb-option>
+
+        </nb-select>
+
+
+        <nb-select formControlName="type" placeholder="type*" required>
+          <nb-option *ngFor="let t of categories" value="{{t.type}}">{{t.type}}</nb-option>
+
+        </nb-select>
+
+
+        <input type="number" formControlName="price" nbInput placeholder="Price*" required>
+        <p class="errorText" *ngIf="!addProductForms.controls.price.valid && addProductForms.controls.price.touched">
+          Price is required
+        </p>
+
+        <textarea nbInput formControlName="description" style="margin-top: 30px;" placeholder="Description(0-100)"
+          maxlength="100"></textarea>
+
+        <input #img type="text" formControlName="photoUrl" nbInput placeholder="URL photo*" required>
+        <p class="errorText" *ngIf="onlyImage">{{onlyImage}}</p>
+        <p class="errorText"
+          *ngIf="!addProductForms.controls.photoUrl.valid && addProductForms.controls.photoUrl.touched">
+          URL photo is required
+        </p>
+        <button nbButton [disabled]="!f.valid" status="success" style="margin-top: 10px;margin-right: 10px;"
+          (click)="checkImage(img.value,f)">Add product <i class="fas fa-plus"></i></button>
+        <button nbButton style="margin-top: 10px;" [routerLink]="['/mainAdmin']">Back</button>
+
+
+
+
+
+
+      </form>
+
+
+    </div>
+
+  </nb-layout-column>
+</nb-layout>

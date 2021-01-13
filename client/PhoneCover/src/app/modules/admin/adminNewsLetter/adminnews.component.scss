@@ -1,0 +1,29 @@
+.errorText{
+    margin-top: -22px;
+    margin-left: 92px;
+    font-size: 13px;
+    color: red;
+}
+
+#tableDiv thead th {
+    background-color:  #454d55;
+    position: sticky;
+    top: 0;
+  }
+
+#tableDiv{
+    max-height: 500px;
+    overflow: auto;
+    margin-top: 10px;
+}
+
+#searchInput{
+    margin: 5px;
+    
+   
+}
+
+.dialogThemeClass{
+    background-color: #0f121e;
+    color: lightgray;
+}

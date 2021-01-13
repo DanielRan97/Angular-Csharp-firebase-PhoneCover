@@ -1,0 +1,51 @@
+<nb-layout>
+    <nb-layout-column>
+<div id="managerZone">
+
+  <p id="adminName" *ngIf="userArr">Hello , Manager {{userArr.displayName}}</p>
+
+  <h1>Welcome to manager zone</h1>
+
+  <div>
+
+    <h3 id="adminsH3">Admins</h3>
+    <hr />
+
+  </div>
+
+  <div style="margin-top:120px;text-align: center;padding: 2px;">
+
+    <div class="card" *ngFor="let user of admins">
+     
+        <div id="cardBG">
+       
+        <b>Name :{{user.displayName}}</b>
+        <b>Provider :{{user.provider}}</b>
+        <b>Role :{{user.role}}</b>
+
+              <nb-select placeholder="Change role" style="display: block;width: 80%;margin-left: auto;margin-right: auto;margin-top: 5px;">
+                <nb-option value="admin" (click)="changeRoleToAdmin(user,'admin')">Admin</nb-option>
+                <nb-option value="manager" (click)="changeRoleToManager(user,'manager')">Manager</nb-option>
+                
+              </nb-select>
+
+              <button type="button" class="btn btn-danger" (click)="removeUser(user.uid)" style="margin-top: 20px;">
+                Remove
+              </button>
+
+              
+        
+       
+
+      </div>
+
+    </div>
+  
+  </div>
+
+
+
+</div>
+
+    </nb-layout-column>
+</nb-layout>

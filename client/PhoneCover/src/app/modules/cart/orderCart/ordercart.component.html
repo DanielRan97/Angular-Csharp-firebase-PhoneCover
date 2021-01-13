@@ -1,0 +1,50 @@
+<nb-layout>
+    <nb-layout-column>
+<div style="margin-top: -50px;">
+    <h1 style="text-align: center;">Order</h1>
+<form #f="ngForm"  [formGroup]="OrderForms">
+
+    <input type="text" formControlName="name" nbInput placeholder="Name*" required>
+    <p class="errorText" *ngIf="!OrderForms.controls.name.valid && OrderForms.controls.name.touched">
+        Name is required
+         </p>
+    <input type="email"  nbInput formControlName="email" placeholder="Email*"  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required>
+    <p class="errorText" *ngIf="!OrderForms.controls.email.valid && OrderForms.controls.email.touched">
+        Email is required
+         </p>
+    <input type="text"  nbInput formControlName="phone" placeholder="Phone*" pattern="^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$" required>
+    <p class="errorText" *ngIf="!OrderForms.controls.phone.valid && OrderForms.controls.phone.touched">
+        Phone is required
+         </p>
+    <input type="text" formControlName="city" nbInput placeholder="City*" required>
+    <p class="errorText" *ngIf="!OrderForms.controls.city.valid && OrderForms.controls.city.touched">
+        City is required
+         </p>
+    <input type="text" formControlName="address" nbInput placeholder="Address*" required>
+    <p class="errorText" *ngIf="!OrderForms.controls.address.valid && OrderForms.controls.address.touched">
+        Address is required
+         </p>
+    <nb-select placeholder="Shipping" formControlName="shipping" required>
+        <nb-option value="Yes">Yes</nb-option>
+        <nb-option value="No">No</nb-option>
+      </nb-select>
+      <p class="errorText" *ngIf="!OrderForms.controls.shipping.valid && OrderForms.controls.shipping.touched">
+        Shipping is required
+         </p>
+    
+    <input type="text" formControlName="remark" nbInput placeholder="Remark (Optional)">
+
+    <div style="text-align: center;">
+    <button nbButton style="display: inline-block;margin-right: 10px;" [disabled]="!f.valid" status="success" (click)="orderNow(f)">Order Now</button>
+    <button nbButton style="display: inline-block;" (click)="backClicked()">Back</button>
+    </div>
+
+    <h3 *ngIf="orderComplete" style="text-align: center;color: green;">{{orderComplete}} <i class="fas fa-check"></i></h3>
+
+
+
+</form>
+
+</div>
+    </nb-layout-column>
+</nb-layout>

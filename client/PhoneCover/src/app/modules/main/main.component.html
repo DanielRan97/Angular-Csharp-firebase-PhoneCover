@@ -1,0 +1,93 @@
+<nb-layout>
+
+  <nb-layout-header fixed>
+    <button nbButton (click)="toggle()"><i class="fas fa-bars"></i></button>
+    <h1 id="mainTitle" [routerLink]="['/home']">Phone Cover <i class="fas fa-mobile"></i></h1>
+  </nb-layout-header>
+
+  <nb-sidebar fixed id="menu">
+
+    <button class="MenuButton" (click)="toggle()" [routerLink]="['/home']"><i style="float: left;"
+        class="fas fa-home"></i> Home page </button>
+    <button class="MenuButton" (click)="toggle()" [routerLink]="['/cart']"><i style="float: left;"
+        class="fas fa-shopping-cart"> </i>Cart </button>
+    <button class="MenuButton" (click)="toggle()" [routerLink]="['/history']"><i style="float: left;"
+        class="fas fa-history"></i> Purchase history</button>
+    <button class="MenuButton" (click)="toggle()" [routerLink]="['/auth']"><i style="float: left;"
+        class="fas fa-user-lock"></i> Sing in as Admin</button>
+    <button type="button" class="newsLB btn btn-primary" (click)="newsClear()" data-toggle="modal" data-target="#newsLetterModal">
+      Sign up to news lettert <i class="fas fa-envelope-open-text" style="margin-left: 3px;"></i>
+    </button>
+    
+    <nb-select placeholder="Change Theme" id="themeSelect">
+      <nb-option value="Dark" (click)="darkTheme()">Dark Mode</nb-option>
+      <nb-option value="Defult" (click)="lightTheme()">Light Mode</nb-option>
+    </nb-select>
+
+    <hr />
+    <h6 style="text-align: center;">Ctegories</h6>
+    <nb-accordion multi>
+      <nb-accordion-item *ngFor="let c of categories">
+        <nb-accordion-item-header>
+          {{c}}
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <div>
+            <div *ngFor="let t of phoneType">
+              <button class="MenuButton" [routerLink]="['showProduct',t.category,t.type]" (click)="refresh()"
+                *ngIf="c == t.category">{{t.type}}</button>
+            </div>
+            <div>
+            </div>
+          </div>
+        </nb-accordion-item-body>
+
+      </nb-accordion-item>
+      <nb-accordion-item>
+      </nb-accordion-item>
+
+    </nb-accordion>
+   
+  </nb-sidebar>
+
+  <nb-layout-column class="colored-column-info">  
+    <div class="modal fade" id="newsLetterModal" tabindex="-1" role="dialog" aria-labelledby="newsLetterModalLabel" aria-hidden="true" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" [ngClass]="{'dialogThemeClass':dialogTheme2 == true}">
+            <h5 class="modal-title" id="newsLetterModalLabel">News Letter</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" style="color: red;">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" [ngClass]="{'dialogThemeClass':dialogTheme2 == true}">
+            <form #f="ngForm" [formGroup]="newsLetterForms">
+              <div class="col">
+                <input type="text" formControlName="name" style="width: 50%;margin-left: auto;margin-right: auto;margin-top: 10px;" class="form-control" placeholder="Name" required maxlength="20">
+                <p class="errorText" *ngIf="!newsLetterForms.controls.name.valid && newsLetterForms.controls.name.touched">
+                  Name is required
+                </p>
+                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="email" style="width: 50%;margin-left: auto;margin-right: auto;margin-top: 10px;" class="form-control" placeholder="Email" required>
+                <p class="errorText" *ngIf="!newsLetterForms.controls.email.valid && newsLetterForms.controls.email.touched">
+                  Email is required
+                </p>
+                <p class="errorText" *ngIf="emailAlredy">
+                  {{emailAlredy}}
+                </p>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer" [ngClass]="{'dialogThemeClass':dialogTheme2 == true}">
+            <h6 *ngIf="newsLetterDone" style="color: green;margin-right: 65px;">successfully registered <i class="fas fa-check" style="margin-left: 4px;"></i></h6>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" [disabled]="!f.valid" (click)="add(f)">Sign up</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <router-outlet></router-outlet>
+  </nb-layout-column>
+
+  
+
+</nb-layout>

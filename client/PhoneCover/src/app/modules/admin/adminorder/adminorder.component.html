@@ -1,0 +1,184 @@
+<div id="adminOrder" style="text-align: center;margin-top: 10px;">
+  <div style="text-align: left;">
+    <input id="searchInput" #searchbyname type="text" nbInput placeholder="Search by name"
+      (keyup)="searchOrders(searchbyname.value)">
+    <input id="searchInput" #searchbyEmail type="text" (keyup)="searchOrdersByEmail(searchbyEmail.value)" nbInput
+      placeholder="Search by email">
+
+    <nb-select id="searchInput" placeholder="Sort By">
+      <nb-option value="id" (click)="sortById()">ID</nb-option>
+      <nb-option value="name" (click)="sortByName()">Name</nb-option>
+      <nb-option value="email" (click)="sortByEmail()">Email</nb-option>
+      <nb-option value="city" (click)="sortByCity()">city</nb-option>
+      <nb-option value="Price low-high" (click)="priceToHigh()">Price low-high</nb-option>
+      <nb-option value="Price high-low" (click)="priceToLow()">Price high-low</nb-option>
+    </nb-select>
+
+  </div>
+  <div id="tableDiv">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">City</th>
+          <th scope="col">Address</th>
+          <th scope="col">Shipping</th>
+          <th scope="col">Price</th>
+          <th scope="col">ShippingStatus</th>
+          <th scope="col">Date</th>
+          <th scope="col">Products</th>
+          <th scope="col">Action</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!showsearch">
+        <tr *ngFor="let order of orders">
+          <th scope="row">{{order.id}}</th>
+          <td>{{order.name}}</td>
+          <td>{{order.email}}</td>
+          <td>{{order.phone}}</td>
+          <td>{{order.city}}</td>
+          <td>{{order.address}}</td>
+          <td>{{order.shipping}}</td>
+          <td>{{order.price}}.00$</td>
+          <td>{{order.shippingStatus}}</td>
+          <td>{{order.date | date:'MM/dd/yyyy'}} , {{order.date |date:"HH:mm"}}</td>
+          <td><button type="button" (click)="getOrder(order.id)" class="btn btn-warning btn-sm"
+              style="border-radius: 100px;margin-top: 2px;color: white !important;" data-toggle="modal"
+              data-target="#exampleModal">
+              <b>Products</b>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Order Items</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div *ngFor='let i of orderItemsFilter' style="float: left;">
+                        <div>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;">
+                            ID:{{i.id}}
+                          </p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;">
+                            Order ID:{{i.orderId}}
+                          </p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;">
+                            Product ID:{{i.productId}}
+                          </p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;">
+                            quantity :{{i.quantity}}
+                          </p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;">
+                            price :{{i.productPrice}}$
+                          </p>
+                        </div>
+                        <hr>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </button></td>
+          <td><button nbButton shape="round" size="small" status="primary" (click)="edit(order.id,
+              order.name
+              ,order.email
+              ,order.phone
+              ,order.city
+              ,order.address
+              ,order.shipping
+              ,order.price
+              ,order.shippingStatus
+              ,order.remark
+              ,order.date)">
+              Edit
+            </button></td>
+          <td><button nbButton shape="round" size="small" status="danger" (click)="delete(order.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="showsearch">
+        <tr *ngFor="let order of searchOrder">
+          <th scope="row">{{order.id}}</th>
+          <td>{{order.name}}</td>
+          <td>{{order.email}}</td>
+          <td>{{order.phone}}</td>
+          <td>{{order.city}}</td>
+          <td>{{order.address}}</td>
+          <td>{{order.shipping}}</td>
+          <td>{{order.price}}.00$</td>
+          <td>{{order.shippingStatus}}</td>
+          <td>{{order.date | date:'mm/dd/yyyy'}} , {{order.date |date:"HH:mm"}}</td>
+          <td><button type="button" (click)="getOrder(order.id)" class="btn btn-warning btn-sm"
+              style="border-radius: 100px;margin-top: 2px;color: white !important;" data-toggle="modal"
+              data-target="#exampleModal">
+              <b>Products</b>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Order Items</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div *ngFor='let i of orderItemsFilter' style="float: left;">
+                        <div>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;"> ID:{{i.id}}
+                          </p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;"> Order
+                            ID:{{i.orderId}}</p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;"> Product
+                            ID:{{i.productId}}</p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;"> quantity
+                            :{{i.quantity}}</p>
+                          <p style="display: inline-block;margin-left: 10px;color: black !important;"> price
+                            :{{i.productPrice}}$</p>
+                        </div>
+                        <hr>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </button></td>
+          <td><button nbButton shape="round" size="small" status="primary" (click)="edit(order.id,
+                order.name
+                ,order.email
+                ,order.phone
+                ,order.city
+                ,order.address
+                ,order.shipping
+                ,order.price
+                ,order.shippingStatus
+                ,order.remark
+                ,order.date)">
+              Edit
+            </button></td>
+          <td><button nbButton shape="round" size="small" status="danger" (click)="delete(order.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

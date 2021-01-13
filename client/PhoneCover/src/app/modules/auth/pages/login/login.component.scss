@@ -1,0 +1,49 @@
+.header{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .row{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .error{
+    color: red;
+  }
+
+ #loginForm{
+   text-align: center;
+ }
+
+ .form-group input{
+   width: 300px;
+   margin-left: auto;
+   margin-right: auto;
+ }
+
+ .btn{
+   width: 300px;
+ }
+
+#socialButton{
+  margin-top: 30px;
+  text-align: center;
+}
+
+#socialButton button{
+  margin-top: 20px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.errorText{
+  margin-top: 0px;
+  margin-left: 120px;
+  font-size: 13px;
+  color: red;
+}
+

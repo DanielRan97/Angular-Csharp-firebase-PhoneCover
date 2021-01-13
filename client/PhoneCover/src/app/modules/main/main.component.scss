@@ -1,0 +1,65 @@
+#mainTitle{
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Piedra', cursive;
+    font-size: 42px;
+}
+
+.MenuButton{
+    height: 43px;
+    width: 100%;
+    background-color: #ffffff66;
+    border: none;
+}
+
+.MenuButton:hover{
+    background-color: #000000b0;
+    color:#ffffffab ;
+}
+
+
+#menu{
+    text-align: center;
+   
+}
+
+#themeSelect{
+    margin-top: 10px;
+}
+
+.menuTypeButton{
+    border: none;
+    width: 100%;
+    height: 50px;
+    background-color: #ffffff66;
+
+}
+
+.newsLB{
+    border: none;
+    background: none;
+    font-size: 13px;
+    margin-bottom: -6px;
+    color: dodgerblue;
+    text-decoration: underline;
+    margin: 10px;
+}
+
+.newsLB:hover{
+    color: blue;
+  
+}
+
+.errorText{
+    margin-top: 0px;
+    margin-left: 120px;
+    font-size: 13px;
+    color: red;
+}
+
+.dialogThemeClass{
+    background-color: #0f121e;
+    color: lightgray;
+}
+  
+

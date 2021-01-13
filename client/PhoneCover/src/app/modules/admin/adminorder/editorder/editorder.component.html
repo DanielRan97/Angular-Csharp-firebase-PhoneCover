@@ -1,0 +1,41 @@
+<nb-layout>
+    <nb-layout-column>
+<form #f="ngForm"  [formGroup]="OrdersForms">
+
+    <input type="text" formControlName="name" nbInput placeholder="Name*" required>
+    <p class="errorText" *ngIf="!OrdersForms.controls.name.valid && OrdersForms.controls.name.touched">
+        Name is required
+         </p>
+    <input type="email"  nbInput formControlName="email" placeholder="Email*"  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required>
+    <p class="errorText" *ngIf="!OrdersForms.controls.email.valid && OrdersForms.controls.email.touched">
+        Email is required
+         </p>
+    <input type="text"  nbInput formControlName="phone" placeholder="Phone*" pattern="^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$" required>
+    <p class="errorText" *ngIf="!OrdersForms.controls.phone.valid && OrdersForms.controls.phone.touched">
+        Phone is required
+         </p>
+    <input type="text" formControlName="city" nbInput placeholder="City*" required>
+    <p class="errorText" *ngIf="!OrdersForms.controls.city.valid && OrdersForms.controls.city.touched">
+        City is required
+         </p>
+    <input type="text" formControlName="address" nbInput placeholder="Address*" required>
+    <p class="errorText" *ngIf="!OrdersForms.controls.address.valid && OrdersForms.controls.address.touched">
+        Address is required
+         </p>
+    <nb-select placeholder="Shipping status*" formControlName="shippingStatus" required>
+        <nb-option value="Sent">Sent</nb-option>
+        <nb-option value="Not Sent">Not Sent</nb-option>
+      </nb-select>
+      <p class="errorText" *ngIf="!OrdersForms.controls.shippingStatus.valid && OrdersForms.controls.shippingStatus.touched">
+        Shipping status is required
+         </p>
+    
+    <input type="text" formControlName="remark" nbInput placeholder="Remark (Optional)">
+         <div style="text-align: center;">
+    <button nbButton [disabled]="!f.valid" status="success" style="margin-left: auto;margin-right: auto;display: inline-block;" (click)="save(f)">Save</button>
+    <button nbButton style="margin-left: auto;margin-right: auto;display: inline-block;" [routerLink]="['/mainAdmin']">Back</button>
+    </div>
+</form>
+
+</nb-layout-column>
+</nb-layout>

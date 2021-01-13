@@ -1,0 +1,31 @@
+<nb-layout>
+  <nb-layout-column>
+    <div>
+     
+      <button nbButton status="danger" (click)="logout()">Log Out <i class="fas fa-sign-out-alt"
+          style="margin-left: 5px;display: block;"></i></button>
+         
+          <button *ngIf="role == 'manager'" (click)="enterManagerZone()" nbButton status="primary" style="display: block;margin-top: 3px;"> Manager zone <i class="fas fa-lock"></i></button>
+     
+          <h6 *ngIf="role == 'admin'">Hello,{{adminName}}</h6>
+      <h6 *ngIf="role == 'manager'">Hello,Manager {{adminName}}</h6>
+      
+      <div style="text-align: center;margin-top: 1px;">
+
+        <h1 style="text-align: center;">Welcom to Admin zone</h1>
+
+        <nb-tabset fullWidth>
+          <nb-tab tabTitle="Products">
+            <app-admin></app-admin>
+          </nb-tab>
+          <nb-tab tabTitle="Orders">
+            <app-adminorder></app-adminorder>
+          </nb-tab>
+          <nb-tab tabTitle="News Letter">
+            <app-adminnews></app-adminnews>
+          </nb-tab>
+        </nb-tabset>
+      </div>
+    </div>
+  </nb-layout-column>
+</nb-layout>
